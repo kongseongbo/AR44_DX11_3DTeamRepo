@@ -51,6 +51,7 @@ namespace mh
 			math::Matrix matTranslation = math::Matrix::CreateTranslation(float3(transform.p) + mRelativePosition);
 
 			mMatWorld = matScale * matRotation * matTranslation;
+			
 		}
 
 		else

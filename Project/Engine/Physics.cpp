@@ -64,8 +64,6 @@ namespace mh
 	{
 		mScene->simulate(TimeMgr::DeltaTime());
 		mScene->fetchResults(true);
-
-
 	}
 	void Physics::Render()
 	{

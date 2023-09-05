@@ -24,8 +24,6 @@ namespace mh
 		virtual void Init() override;
 		virtual void FixedUpdate()override;
 		virtual void Destroy();
-		//virtual void Destroy()override;
-
 
 		virtual IComponent* Clone(GameObject* _pGameObject);
 
@@ -56,6 +54,7 @@ namespace mh
 		const physx::PxFilterData& GetFilterData() { return mPhysicsInfo.filterData; }
 		void SetOtherLayerInFilterData(define::eLayerType _eOtherLayer) { mPhysicsInfo.filterData.word1 |= 1 << static_cast<int>(_eOtherLayer); }
 
+		void SetMassForDynamic(float _mass);
 		void SetVelocity(const float3& _velocity);
 		void SetVelocity(define::eAxis3D _eAxis, float _velocity);
 		void AddVelocity(const float3& _velocity);

@@ -55,7 +55,7 @@ namespace mh
 
 		if (InputMgr::GetKey(eKeyCode::A))
 		{
-			rb->AddForce((right * -100000.0f * 30.f));
+			rb->AddForce((right * -1000.0f * 30.f));
 			//rb->SetVelocity(define::eAxis3D::X, -mMoveSpeed);
 		}
 

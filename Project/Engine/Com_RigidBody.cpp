@@ -15,7 +15,7 @@ namespace mh
 {
 	Com_RigidBody::Com_RigidBody()
 		: IComponent(define::eComponentType::RigidBody)
-		, mMaxVelocity(10.f)
+		, mMaxVelocity(5.f)
 		, mActor(nullptr)
 		, mShape(nullptr)
 		, mMaterial(nullptr)
@@ -117,6 +117,13 @@ namespace mh
 		//_transform.p.z = -_transform.p.z;
 		AssertEx(mbAppliedPhysics, L"RigidBody::SetPhysicsTransform() - 물리가 들어가지 않은 오브젝트에 대한 SetPhysicsTransform 호출");
 		GetActor<physx::PxRigidActor>()->setGlobalPose(_transform);
+	}
+	void Com_RigidBody::SetMassForDynamic(float _mass)
+	{
+		AssertEx(mbAppliedPhysics, L"RigidBody::SetMassForDynamic() - 물리가 들어가지 않은 오브젝트에 대한 SetMassForDynamic 호출");
+		physx::PxActor* actor = mShape->getActor();
+		physx::PxRigidDynamic* rigidActor = actor->is<physx::PxRigidDynamic>();
+		rigidActor->setMass(_mass);
 	}
 	void Com_RigidBody::SetVelocity(const float3& _velocity)
 	{
@@ -325,9 +332,11 @@ namespace mh
 		AssertEx(mbAppliedPhysics, L"RigidBody::AddForce() - 물리가 들어가지 않은 오브젝트에 대한 AddForce 호출");
 		AssertEx(define::eActorType::Static != mPhysicsInfo.eActorType, L"RigidBody::AddForce() - Static 객체에 대해 힘 적용");
 
+		PxVec3 force = PxVec3(_force.x, _force.y, _force.z);
+
 		PxRigidBodyExt::addForceAtPos(
 			*GetDynamicActor(),
-			_force,
+			force,
 			GetOwner()->GetComponent<Com_Transform>()->GetPhysicalPosition(),
 			physx::PxForceMode::eFORCE
 		);

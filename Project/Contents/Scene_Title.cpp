@@ -74,16 +74,16 @@ namespace mh
 			light3d->SetAmbient(float4(0.3f, 0.3f, 0.3f, 1.f));
 		}
 
-		{
-			std::shared_ptr<MeshData> meshdata = ResMgr::Load<MeshData>("Player_Default");
+		//{
+		//	std::shared_ptr<MeshData> meshdata = ResMgr::Load<MeshData>("Player_Default");
 
-			GameObject* modeling = meshdata->Instantiate();
-			//modeling->AddComponent<Script_Player>();
+		//	GameObject* modeling = meshdata->Instantiate();
+		//	//modeling->AddComponent<Script_Player>();
 
-			modeling->GetComponent<Com_Animator3D>()->Play("OverheadSlash");
-			
-			EventMgr::SpawnGameObject(define::eLayerType::Player, modeling);
-		}
+		//	modeling->GetComponent<Com_Animator3D>()->Play("OverheadSlash");
+		//	
+		//	EventMgr::SpawnGameObject(define::eLayerType::Player, modeling);
+		//}
 
 		//{
 		//	// Main Com_Camera Game Object
@@ -174,18 +174,22 @@ namespace mh
 
 			std::shared_ptr<MeshData> meshdata = ResMgr::Load<MeshData>("Player_Default");
 			GameObject* obj = meshdata->Instantiate();
-			obj->GetComponent<Com_Animator3D>()->Play("Take 001");
+			obj->GetComponent<Com_Animator3D>()->Play("OverheadSlash.a3d");
 			obj->SetName("obj");
 			obj->SetLayerType(define::eLayerType::Player);
+
 			Com_RigidBody* rigid = obj->AddComponent<Com_RigidBody>();
 			rigid->SetPhysical(info);
 			rigid->SetFreezeRotation(FreezeRotationFlag::ROTATION_Y, true);
 			rigid->SetFreezeRotation(FreezeRotationFlag::ROTATION_X, true);
 			rigid->SetFreezeRotation(FreezeRotationFlag::ROTATION_Z, true);
-		
+			rigid->SetMassForDynamic(1.0f);
+			Com_Transform* tr = obj->GetComponent<Com_Transform>();
+			tr->SetPosition(float3(0.0f,200.0f, 0.0f));
+
 			obj->AddComponent<ICollider3D>();
-			EventMgr::SpawnGameObject(define::eLayerType::Player, obj);
 			obj->AddComponent<Script_Player>();
+			EventMgr::SpawnGameObject(define::eLayerType::Player, obj);
 		}
 
 		{
