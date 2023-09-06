@@ -31,12 +31,6 @@ namespace mh
 		Com_Transform* tr = GetOwner()->GetComponent<Com_Transform>();
 		Com_RigidBody* rb = GetOwner()->GetComponent<Com_RigidBody>();
 
-		Com_Transform* camTr = RenderMgr::GetMainCam()->GetOwner()->GetComponent<Com_Transform>();
-		float3 forward = camTr->GetForward();
-		float3 right = camTr->GetRight();
-		right.y = 0.f;
-
-
 		if (InputMgr::GetKey(eKeyCode::H))
 		{
 			tr->SetPosition(float3(0.0f, 0.0f, 0.f));
@@ -44,7 +38,7 @@ namespace mh
 
 		if (InputMgr::GetKey(eKeyCode::W))
 		{
-			mMoveSpeed += 2.0f * TimeMgr::DeltaTime();
+			//mMoveSpeed += 2.0f * TimeMgr::DeltaTime();
 			rb->SetVelocity(define::eAxis3D::Z, mMoveSpeed);
 		}
 
@@ -55,8 +49,8 @@ namespace mh
 
 		if (InputMgr::GetKey(eKeyCode::A))
 		{
-			rb->AddForce((right * -1000.0f * 30.f));
-			//rb->SetVelocity(define::eAxis3D::X, -mMoveSpeed);
+			//rb->AddForce((right * -1000.0f * 30.f));
+			rb->SetVelocity(define::eAxis3D::X, -mMoveSpeed);
 		}
 
 		if (InputMgr::GetKey(eKeyCode::D))

@@ -183,7 +183,6 @@ namespace mh
 			rigid->SetFreezeRotation(FreezeRotationFlag::ROTATION_Y, true);
 			rigid->SetFreezeRotation(FreezeRotationFlag::ROTATION_X, true);
 			rigid->SetFreezeRotation(FreezeRotationFlag::ROTATION_Z, true);
-			rigid->SetMassForDynamic(1.0f);
 			Com_Transform* tr = obj->GetComponent<Com_Transform>();
 			tr->SetPosition(float3(0.0f,200.0f, 0.0f));
 

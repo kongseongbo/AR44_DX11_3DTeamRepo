@@ -77,6 +77,10 @@ namespace mh::define
 		float restitution;
 	};
 
+// ============
+// PhysX
+// ============
+
 	struct Geometries
 	{
 		Geometries(eGeometryType _geometryType, float3 vBoxHalfSize)

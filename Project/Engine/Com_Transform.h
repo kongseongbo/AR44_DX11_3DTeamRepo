@@ -81,10 +81,7 @@ namespace mh
 		void Move(const float3& _velocity);
 
 		const math::Matrix& GetWorldMatrix() { return mMatWorld; }
-		const math::Matrix& GetWorldMatrix() const { return mMatWorld; }
-
-
-	
+		//const math::Matrix& GetWorldMatrix() const { return mMatWorld; }
 
 	private:
 		Com_Transform* mpParent;
